@@ -1,28 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Weather App</title>
-  <link rel="stylesheet" href="./style/styles.css">
-</head>
-<body>
-  <main>
-    <h1>The Weather App</h1>
-    <div class="search-container">
-        <label for="cityName"> City
-          <input type="search" autocapitalize="sentences" id="cityName" placeholder="Write your city">
-          <button class='primary-button' type="button" id="search">Search</button>
-        </label> 
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style/styles.css" />
+    <link rel="stylesheet" href="./style/desktop.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <a
+            href="https://www.linkedin.com/in/felipe-toro-castilla/"
+            target="_blank"
+            ><i class="fa-brands fa-linkedin header"></i
+          ></a>
+          <a href="https://github.com/pipetoroc" target="_blank"
+            ><i class="fa-brands fa-github header"></i
+          ></a>
+          <a href="mailto:ftorocastilla@gmail.com" target="_blank">
+            <i class="fa-regular fa-envelope header"></i>
+          </a>
+        </div>
+      </header>
+      <h1>The Weather App</h1>
+      <div class="search-container">
+        <form>
+          <label for="cityName">
+            <input
+              type="search"
+              autocapitalize="sentences"
+              id="cityName"
+              placeholder="Write your city to know the weather" />
+            <i class="fas fa-search" ></i>
+            <button class="primary-button" type="button" id="search">
+              Search
+            </button>
+          </label>
+        </form>
+      </div>
+      <section id="currentWeather"></section>
+      <section id="weatherHour"></section>
+    </main>
+    <footer>
+      <p>Copyright © <span></span> PipeToroC. All Rights Reverved</p>
+      <img
+        src="https://drive.google.com/uc?id=1oRExPWGhIWoJj_uEIekS3OZOPBlKLXER"
+        alt="Logo PipeToroC"
+        id="logo" />
+    </footer>
 
-    </div>   
-    <section id="currentWeather">
-
-    </section>
-    <section id="weatherHour"></section>
-  </main>
-  
-  <script src="./src/main.js"></script>
-</body>.
+    <script src="./src/main.js"></script>
+    <script
+      src="https://kit.fontawesome.com/38f91498bb.js"
+      crossorigin="anonymous"></script>
+  </body>
+  .
 </html>

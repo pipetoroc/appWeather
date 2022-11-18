@@ -1,12 +1,20 @@
 const searchButton = document.getElementById("search");
 searchButton.onclick = geocodingApi;
 
-  async function geocodingApi() {
+const cityNameInput = document.getElementById("cityName");
+
+cityNameInput.addEventListener("keydown", (event) => {
+  if (event.keyCode === 13) {
+    geocodingApi();
+  }
+});
+
+async function geocodingApi() {
   let latitud = 0;
   let longitud = 0;
   let place = "";
-  const cityName = document.getElementById("cityName");
-  const city = cityName.value;
+
+  const city = cityNameInput.value;
   const GEOCODING = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=125f79c4bbc76005bd37ada5db7e73ee`;
 
   const response = await fetch(GEOCODING);
@@ -17,7 +25,7 @@ searchButton.onclick = geocodingApi;
   place = data[0].name;
 
   currentWeather(latitud, longitud, place);
-  weatherMonth(latitud, longitud);
+  weatherDay(latitud, longitud, place);
 }
 
 async function currentWeather(lat, lon, place) {
@@ -28,56 +36,71 @@ async function currentWeather(lat, lon, place) {
 
   const currentWeather = document.getElementById("currentWeather");
   const div = document.createElement("div");
-  div.className = 'currentWeatherDiv';
+  div.className = "currentWeatherDiv";
   const cityName = document.createElement("h2");
   const iconWeather = document.createElement("img");
-  const date = document.createElement('p');
+  const date = document.createElement("p");
   const now = new Date();
-  const temperatura = document.createElement('p');
-  temperatura.className = 'currentWeather-temperatura';
-  const description = document.createElement('p');
-  description.className = 'description';
+  const temperatura = document.createElement("p");
+  temperatura.className = "currentWeather-temperatura";
+  const description = document.createElement("p");
+  description.className = "description";
+  const iconWeatherContainer = document.createElement("div");
+  iconWeatherContainer.className = "iconWeatherContainer";
 
-  date.innerHTML = `${now.getUTCDate()}-${now.getMonth()+1}/${now.getFullYear()}`
-  date.className = 'date';
+  date.innerHTML = `${now.getUTCDate()}-${
+    now.getMonth() + 1
+  }/${now.getFullYear()}`;
+  date.className = "date";
 
   cityName.innerHTML = `${place}, ${data.sys.country}`;
   iconWeather.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-  iconWeather.className = 'iconWeather';
-  temperatura.innerHTML = `${(data.main.temp).toFixed(0)}°C`;
+  iconWeather.className = "iconWeather";
+  temperatura.innerHTML = `${data.main.temp.toFixed(0)}°C`;
   description.innerHTML = data.weather[0].description;
 
-  div.append(cityName, date, temperatura, iconWeather, description);
+  iconWeatherContainer.append(iconWeather, description);
+  div.append(cityName, date, temperatura, iconWeatherContainer);
   currentWeather.append(div);
 }
 
-async function weatherMonth (lat, lon) {
-  const URL_MONTH = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=125f79c4bbc76005bd37ada5db7e73ee&units=metric`;
+async function weatherDay(lat, lon, place) {
+  const URL_MONTH = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=8&appid=125f79c4bbc76005bd37ada5db7e73ee&units=metric`;
   const response = await fetch(URL_MONTH);
   const data = await response.json();
-  console.log(data)
+  console.log(data);
 
-  const section = document.getElementById('weatherHour');
+  const section = document.getElementById("weatherHour");
+  const cardContainer = document.createElement("div");
+  cardContainer.className = "cardContainer";
+  const titulo = document.createElement("h3");
+  titulo.className = "tituloCity";
+  titulo.innerHTML = place;
+  cardContainer.appendChild(titulo);
 
-  data.list.forEach(element => {
+  data.list.forEach((element) => {
+    const card = document.createElement("div");
+    card.className = "weatherHour-container";
 
-    const card = document.createElement('div');
-    card.className = 'weatherMonth-container';
-    const iconHourly = document.createElement('img');
-    const h3Hour = document.createElement('h3');
-    h3Hour.className = 'hora';
-    const descriptionHour = document.createElement('p');
-    descriptionHour.className = 'description-hour';
-    const temperaturaHourly = document.createElement('p');
-    temperaturaHourly.className = 'tempHour';
+    const iconHourly = document.createElement("img");
+    const h3Hour = document.createElement("h3");
+    h3Hour.className = "hora";
+    const descriptionHour = document.createElement("p");
+    descriptionHour.className = "description-hour";
+    const temperaturaHourly = document.createElement("p");
+    temperaturaHourly.className = "tempHour";
 
     iconHourly.src = `https://openweathermap.org/img/wn/${element.weather[0].icon}@2x.png`;
     h3Hour.innerHTML = element.dt_txt;
     descriptionHour.innerHTML = element.weather[0].description;
-    temperaturaHourly.innerHTML = `${(element.main.temp).toFixed(0)}°C`;
+    temperaturaHourly.innerHTML = `${element.main.temp.toFixed(0)}°C`;
 
-    card.append(h3Hour,temperaturaHourly, iconHourly, descriptionHour );
-
-    section.appendChild(card);
+    card.append(h3Hour, temperaturaHourly, iconHourly, descriptionHour);
+    cardContainer.appendChild(card);
   });
+  section.appendChild(cardContainer);
 }
+
+const span = document.querySelector("span");
+const date = new Date();
+span.innerHTML = date.getFullYear();
