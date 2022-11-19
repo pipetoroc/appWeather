@@ -15,7 +15,9 @@ async function geocodingApi() {
   let place = "";
 
   const city = cityNameInput.value;
-  const GEOCODING = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=125f79c4bbc76005bd37ada5db7e73ee`;
+const API_KEY = '125f79c4bbc76005bd37ada5db7e73ee';
+
+  const GEOCODING = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
 
   const response = await fetch(GEOCODING);
   const data = await response.json();
@@ -24,12 +26,12 @@ async function geocodingApi() {
   longitud = data[0].lon;
   place = data[0].name;
 
-  currentWeather(latitud, longitud, place);
-  weatherDay(latitud, longitud, place);
+  currentWeather(latitud, longitud, place, API_KEY);
+  weatherDay(latitud, longitud, place, API_KEY);
 }
 
-async function currentWeather(lat, lon, place) {
-  const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=125f79c4bbc76005bd37ada5db7e73ee&units=metric`;
+async function currentWeather(lat, lon, place, API_KEY) {
+  const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
   const response = await fetch(API_URL);
   const data = await response.json();
   console.log(data);
@@ -64,8 +66,8 @@ async function currentWeather(lat, lon, place) {
   currentWeather.append(div);
 }
 
-async function weatherDay(lat, lon, place) {
-  const URL_MONTH = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=8&appid=125f79c4bbc76005bd37ada5db7e73ee&units=metric`;
+async function weatherDay(lat, lon, place, API_KEY) {
+  const URL_MONTH = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&cnt=8&appid=${API_KEY}&units=metric`;
   const response = await fetch(URL_MONTH);
   const data = await response.json();
   console.log(data);
