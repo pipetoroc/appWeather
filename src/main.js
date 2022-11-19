@@ -17,7 +17,7 @@ async function geocodingApi() {
   const city = cityNameInput.value;
 const API_KEY = '125f79c4bbc76005bd37ada5db7e73ee';
 
-  const GEOCODING = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
+  const GEOCODING = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${API_KEY}`;
 
   const response = await fetch(GEOCODING);
   const data = await response.json();
