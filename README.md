@@ -6,11 +6,11 @@ Additionally, you can see the weather status every three hours in the next 48 ho
 
 This app was created as a practice of manipulating DOM. 
 
-##Project URL
+## Project URL
 ___
 - You can check the project working in the following link: (https://pipetoroc.github.io/appWeather/)
 
-##Tecnologies
+## Tecnologies
 ____
 
 - javaScript
