@@ -4,8 +4,10 @@ searchButton.onclick = geocodingApi;
 const cityNameInput = document.getElementById("cityName");
 
 cityNameInput.addEventListener("keydown", (event) => {
-  if (event.keyCode === 13) {
+  console.log(event)
+  if (event.key === "Enter") {
     geocodingApi();
+    event.preventDefault();
   }
 });
 
