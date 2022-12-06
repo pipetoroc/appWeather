@@ -55,6 +55,7 @@ label{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
 }
 input{
@@ -174,8 +175,22 @@ footer{
   width: 5.125rem;
 }
 .primary-button{
-  display: none;
-}
+  display: block;
+  padding: 0 1rem;
+  margin: 2.5rem;
+  height: 3rem;
+  min-width: 78px;
+  border: none;
+  border-radius: .125rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 2.25rem;
+  letter-spacing: 0.04rem;
+  color: var(--text);
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}  
 .tituloCity{
   position: absolute;
   margin-left: 2rem;
